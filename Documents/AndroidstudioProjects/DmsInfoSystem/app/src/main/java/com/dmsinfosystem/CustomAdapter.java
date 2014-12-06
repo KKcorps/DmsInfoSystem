@@ -69,18 +69,21 @@ class CustomAdapter extends BaseAdapter {
         int rowType = getItemViewType(position);
 
         if (convertView == null) {
+
             holder = new ViewHolder();
             switch (rowType) {
                 case TYPE_ITEM:
-                    convertView = mInflater.inflate(R.layout.snippet_item1, null);
+                    convertView = mInflater.inflate(R.layout.subtext, null);
                     holder.textView = (TextView) convertView.findViewById(R.id.text);
                     break;
+
                 case TYPE_SEPARATOR:
-                    convertView = mInflater.inflate(R.layout.snippet_item2, null);
+                    convertView = mInflater.inflate(R.layout.textheader, null);
                     holder.textView = (TextView) convertView.findViewById(R.id.textSeparator);
                     break;
             }
             convertView.setTag(holder);
+
         } else {
             holder = (ViewHolder) convertView.getTag();
         }

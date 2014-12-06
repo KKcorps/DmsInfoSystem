@@ -18,10 +18,12 @@ import android.widget.TextView;
 public class HomeScreen extends Activity {
 
     String TAG = "DMS  Activity";
+    String PRO = "product";
     int REQUEST = 101;
     public static TextView nameDisplay;
     public static TextView linkView;
     private String[] mProducts, mSubProducts;
+    private String subProduct;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -42,10 +44,23 @@ public class HomeScreen extends Activity {
         //Toggle Drawer with action Bar
         mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.drawable.ic_launcher,R.string.app_name,R.string.products_drawer);
 
+        mAdapter = new CustomAdapter(this);
+        for (int i = 1; i < mProducts.length ; i++) {
+            mAdapter.addItem(mProducts[i]);
+            subProduct = PRO + mProducts[i];
+            mSubProducts = getResources().getStringArray(R.array.subProduct);
+
+            for (int j = 1;j < mSubProducts.length;j++ ){
+
+                mAdapter.addSectionHeaderItem(mSubProducts[j]);
+            }
+
+        }
+
+
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mAppTitles));
-        //Log.i(TAG,"String Adapter set");
+        mDrawerList.setAdapter(mAdapter);
+        Log.i(TAG,"String Adapter set");
 
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
