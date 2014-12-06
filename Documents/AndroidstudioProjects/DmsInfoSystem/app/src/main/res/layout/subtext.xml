@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView
+    android:id="@+id/text"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFF"
+    android:gravity="center_vertical"
+    android:padding="5dp"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:textColor="#FF000000" />
