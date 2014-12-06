@@ -2,6 +2,8 @@ package com.dmsinfosystem;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -22,7 +25,9 @@ public class HomeScreen extends Activity {
     int REQUEST = 101;
     public static TextView nameDisplay;
     public static TextView linkView;
-    private String[] mProducts, mSubProducts;
+    private String[] mProducts;
+    private String[][] mSubProducts;
+    private String[] mProductNames;
     private String subProduct;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -34,8 +39,8 @@ public class HomeScreen extends Activity {
         setContentView(R.layout.activity_home_screen);
 
         //Setting up Navigation Drawer
-        mProducts = getResources().getStringArray(R.array.products);
-
+        mProducts = getResources().getStringArray(R.array.product);
+        //mSubProducts = getResources().getStringArray(R.array.subProduct);
 
         //Log.i(TAG, mAppTitles[0]);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -44,18 +49,36 @@ public class HomeScreen extends Activity {
         //Toggle Drawer with action Bar
         mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.drawable.ic_launcher,R.string.app_name,R.string.products_drawer);
 
-        mAdapter = new CustomAdapter(this);
-        for (int i = 1; i < mProducts.length ; i++) {
+        CustomAdapter mAdapter = new CustomAdapter(this);
+
+        Resources res = getResources();
+        TypedArray ta = res.obtainTypedArray(R.array.subProduct);
+        int n = ta.length();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; ++i) {
+            mAdapter.addItem(mProducts[i]);
+
+            int id = ta.getResourceId(i, 0);
+
+            if (id > 0) {
+                array[i] = res.getStringArray(id);
+                for(int j=0;j<array[i].length;j++){
+                    mAdapter.addSectionHeaderItem(array[i][j]);
+                }
+            }
+        }
+
+        ta.recycle(); // Important!
+        /*for (int i = 1; i < mProducts.length ; i++) {
             mAdapter.addItem(mProducts[i]);
             subProduct = PRO + mProducts[i];
-            mSubProducts = getResources().getStringArray(R.array.subProduct);
-
+            mProductNames = mSubProducts[i];
             for (int j = 1;j < mSubProducts.length;j++ ){
 
                 mAdapter.addSectionHeaderItem(mSubProducts[j]);
             }
 
-        }
+        }*/
 
 
         // Set the adapter for the list view

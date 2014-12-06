@@ -85,6 +85,7 @@ class CustomAdapter extends BaseAdapter {
             convertView.setTag(holder);
 
         } else {
+
             holder = (ViewHolder) convertView.getTag();
         }
         holder.textView.setText(mData.get(position));
