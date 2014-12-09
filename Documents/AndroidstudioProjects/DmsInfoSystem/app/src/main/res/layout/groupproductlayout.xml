@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/groupHeadingLayout"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:orientation="horizontal"
+    android:clickable="true"
+    android:weightSum="1">
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="246dp"
+        android:layout_height="80dp"
+        android:id="@+id/groupSeparator"
+        android:gravity="center"
+        android:padding="2dp"
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:visibility="visible" />-->
+
+        <!--<Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buy"
+        android:id="@+id/buttonBuy"
+        android:layout_weight="0.83" />-->
+
+<!--
+</LinearLayout>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/lblListHeader"
+        android:layout_width="242dp"
+        android:text="Hello"
+        android:layout_height="wrap_content"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:textSize="24pt"
+        android:textColor="#000000" />
+
+
+</LinearLayout>

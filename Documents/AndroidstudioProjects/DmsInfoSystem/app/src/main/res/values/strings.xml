@@ -7,6 +7,15 @@
     <string name="action_settings">Settings</string>
     <string name="action_share">Share App</string>
     <string name="action_contact">Contact Us</string>
+    <string name="drawer_open">Products</string>
+    <string name="drawer_close">DMS</string>
+
+    <string-array name="popularProducts">
+        <item>Email Hosting</item>
+        <item>Web Designing</item>
+        <item>SEO</item>
+        <item>SMM</item>
+    </string-array>
 
     <string-array name="product">
         <item>Hosting</item>
@@ -55,5 +64,53 @@
         <item>@array/productDesign</item>
         <item>@array/productServices</item>
     </array>
+
+    <string-array name="hostingPackages">
+        <item>Basic</item>
+        <item>Standard</item>
+        <item>Premium</item>
+        <item>Premium Plus</item>
+    </string-array>
+
+    <array name="ResellerHostingBasic">
+        <item>25600 MB Web Space</item>
+        <item>25600 MB Data Transfer Bandwidth</item>
+        <item>40 Accounts</item>
+        <item>100 Websites</item>
+        <item>Unlimited E-Mail ID’s</item>
+        <item>Unlimited Sub Domains</item>
+        <item>C-Panel – Control Panel (WHM Control)</item>
+    </array>
+
+    <array name="ResellerHostingStandard">
+        <item>51200 MB Web Space</item>
+        <item>51200 MB Data Transfer Bandwidth</item>
+        <item>60 Accounts</item>
+        <item>200 Websites</item>
+        <item>Unlimited E-Mail ID’s</item>
+        <item>Unlimited Sub Domains</item>
+        <item>C-Panel – Control Panel (WHM Control)</item>
+    </array>
+
+    <array name="ResellerHostingPremium">
+        <item>102400 MB Web Space</item>
+        <item>102400 MB Data Transfer Bandwidth</item>
+        <item>100 Accounts</item>
+        <item>300 Websites</item>
+        <item>Unlimited E-Mail ID’s</item>
+        <item>Unlimited Sub Domains</item>
+        <item>C-Panel – Control Panel (WHM Control)</item>
+    </array>
+
+    <array name="ResellerHostingPremiumPlus">
+        <item>204800 MB Web Space</item>
+        <item>204800 MB Data Transfer Bandwidth</item>
+        <item>200 Accounts</item>
+        <item>400 Websites</item>
+        <item>Unlimited E-Mail ID’s</item>
+        <item>Unlimited Sub Domains</item>
+        <item>C-Panel – Control Panel (WHM Control)</item>
+    </array>
+
 
 </resources>

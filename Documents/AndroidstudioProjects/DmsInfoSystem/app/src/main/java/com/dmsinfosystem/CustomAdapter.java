@@ -6,6 +6,7 @@ package com.dmsinfosystem;
 import java.util.ArrayList;
 import java.util.TreeSet;
 import android.content.Context;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,11 @@ class CustomAdapter extends BaseAdapter {
     private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
     private LayoutInflater mInflater;
+    private int LayoutHead, LayoutSub;
 
-    public CustomAdapter(Context context) {
+    public CustomAdapter(Context context, int layoutHead, int layoutSub) {
+        LayoutHead = layoutHead;
+        LayoutSub = layoutSub;
         mInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -73,12 +77,12 @@ class CustomAdapter extends BaseAdapter {
             holder = new ViewHolder();
             switch (rowType) {
                 case TYPE_ITEM:
-                    convertView = mInflater.inflate(R.layout.subtext, null);
+                    convertView = mInflater.inflate(LayoutSub, null);
                     holder.textView = (TextView) convertView.findViewById(R.id.text);
                     break;
 
                 case TYPE_SEPARATOR:
-                    convertView = mInflater.inflate(R.layout.textheader, null);
+                    convertView = mInflater.inflate(LayoutHead, null);
                     holder.textView = (TextView) convertView.findViewById(R.id.textSeparator);
                     break;
             }

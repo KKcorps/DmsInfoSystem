@@ -2,6 +2,7 @@ package com.dmsinfosystem;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -14,6 +15,9 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,11 +36,35 @@ public class HomeScreen extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private LinearLayout imageGallery;
+    private HorizontalScrollView mHorizontalScrollViewTop;
+    private int[] ImageArray = {R.drawable.webd,R.drawable.webhosting,R.drawable.seo,R.drawable.ecommerce};
+    private String[] PopularProductsArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+
+        PopularProductsArray = getResources().getStringArray(R.array.popularProducts);
+        //Setting images for Horizontal Scroller
+        imageGallery=(LinearLayout) findViewById(R.id.linearImage);
+
+        mHorizontalScrollViewTop = (HorizontalScrollView) findViewById(R.id.HSVImage);
+        for(int i=0; i<ImageArray.length; i++){
+
+            ImageView image=new ImageView(HomeScreen.this);
+            TextView TitleView =  new TextView(HomeScreen.this);
+            LinearLayout mDivision = new LinearLayout(HomeScreen.this);
+            TitleView.setText(PopularProductsArray[i]);
+            image.setBackgroundResource(ImageArray[i]);
+
+            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(100,100);
+            mDivision.setLayoutParams(imageParams);
+            mDivision.addView(image);
+            mDivision.addView(TitleView);
+            imageGallery.addView(mDivision);
+            //imageGallery.addView(mDivision);
+        }
 
         //Setting up Navigation Drawer
         mProducts = getResources().getStringArray(R.array.product);
@@ -49,7 +77,7 @@ public class HomeScreen extends Activity {
         //Toggle Drawer with action Bar
         mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.drawable.ic_launcher,R.string.app_name,R.string.products_drawer);
 
-        CustomAdapter mAdapter = new CustomAdapter(this);
+        CustomAdapter mAdapter = new CustomAdapter(this,R.layout.textheader,R.layout.subtext);
 
         Resources res = getResources();
         TypedArray ta = res.obtainTypedArray(R.array.subProduct);
@@ -88,10 +116,29 @@ public class HomeScreen extends Activity {
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         Log.i(TAG, "Listener set");
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
+
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                mDrawerLayout,         /* DrawerLayout object */
+                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
+                R.string.drawer_open,  /* "open drawer" description for accessibility */
+                R.string.drawer_close  /* "close drawer" description for accessibility */
+        ) {
+            public void onDrawerClosed(View view) {
+                getActionBar().setTitle(R.string.drawer_close);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                getActionBar().setTitle(R.string.drawer_open);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
 
     }
 
@@ -100,7 +147,14 @@ public class HomeScreen extends Activity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectItem(position);
-            Log.i("Navigation", "In Item click listened method");
+            Log.i("Navigation", String.valueOf(position) +" In Item click listened method");
+            Intent productIntent = new Intent(HomeScreen.this, SubProductActivity.class);
+
+            CustomAdapter newAdapter = (CustomAdapter) parent.getAdapter();
+            String mSubProductHeading = newAdapter.getItem(position);
+
+            productIntent.putExtra("subProduct",mSubProductHeading);
+            startActivity(productIntent);
 
         }
     }
@@ -153,10 +207,37 @@ public class HomeScreen extends Activity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // If the nav drawer is open, hide action items related to the content view
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggls
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;

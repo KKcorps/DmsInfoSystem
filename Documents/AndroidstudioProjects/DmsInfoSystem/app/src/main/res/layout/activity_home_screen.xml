@@ -4,27 +4,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/home"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".HomeScreen">
 
-    <ImageView
+    <!--<ImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/ideas"/>
+        android:background="@drawable/ideas"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" /> -->
+
+    <HorizontalScrollView
+        android:id="@+id/HSVImage"
+        android:layout_width="match_parent"
+        android:layout_height="200sp">
+
+
+
+        <LinearLayout
+            android:id="@+id/linearImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
 
     <TextView
         android:text="@string/hello_world"
         android:layout_width="wrap_content"
         android:visibility="invisible"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
 
 </RelativeLayout>
 
