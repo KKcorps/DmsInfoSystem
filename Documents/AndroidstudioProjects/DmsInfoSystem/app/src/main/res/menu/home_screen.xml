@@ -15,4 +15,12 @@
         android:title="@string/action_contact"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <!-- Search Widget -->
+    <item
+        android:id="@+id/action_search"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@drawable/ic_action_search"
+        android:showAsAction="always"
+        android:title="Search"/>
 </menu>
+
