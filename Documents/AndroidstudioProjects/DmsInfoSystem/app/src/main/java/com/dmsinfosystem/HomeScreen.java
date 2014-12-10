@@ -1,17 +1,23 @@
 package com.dmsinfosystem;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.*;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
 
 
 public class HomeScreen extends Activity {
@@ -38,12 +45,16 @@ public class HomeScreen extends Activity {
     private ActionBarDrawerToggle mDrawerToggle;
     private LinearLayout imageGallery;
     private HorizontalScrollView mHorizontalScrollViewTop;
-    private int[] ImageArray = {R.drawable.webd,R.drawable.webhosting,R.drawable.seo,R.drawable.ecommerce};
+    private int[] ImageArray = {R.drawable.seoportrait3,R.drawable.webdevelopmentportrait2,R.drawable.ecommerceportrait2};
     private String[] PopularProductsArray;
+
+    //Facebook Share Dialog
+    //private UiLifecycleHelper uiHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home_screen);
 
         PopularProductsArray = getResources().getStringArray(R.array.popularProducts);
         //Setting images for Horizontal Scroller
@@ -55,14 +66,21 @@ public class HomeScreen extends Activity {
             ImageView image=new ImageView(HomeScreen.this);
             TextView TitleView =  new TextView(HomeScreen.this);
             LinearLayout mDivision = new LinearLayout(HomeScreen.this);
-            TitleView.setText(PopularProductsArray[i]);
-            image.setBackgroundResource(ImageArray[i]);
 
-            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(100,100);
-            mDivision.setLayoutParams(imageParams);
+            TitleView.setText(PopularProductsArray[i]);
+            TitleView.setTextColor(Color.WHITE);
+            //image.setBackgroundResource(ImageArray[i]);
+
+            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            imageParams.setMargins(0,0,0,0);
+            image.setImageResource(ImageArray[i]);
+            image.setLayoutParams(imageParams);
+            imageGallery.setDividerPadding(1);
+            /*mDivision.setOrientation(LinearLayout.VERTICAL);
+            //mDivision.setLayoutParams(imageParams);
             mDivision.addView(image);
-            mDivision.addView(TitleView);
-            imageGallery.addView(mDivision);
+            mDivision.addView(TitleView);*/
+            imageGallery.addView(image);
             //imageGallery.addView(mDivision);
         }
 
@@ -139,8 +157,23 @@ public class HomeScreen extends Activity {
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
+        handleIntent(getIntent());
 
     }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            //txtQuery.setText("Search Query: " + query);
+        }
+    }
+
 
     /* The click listener for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
