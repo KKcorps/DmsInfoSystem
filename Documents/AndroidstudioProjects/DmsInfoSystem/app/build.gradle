@@ -8,8 +8,8 @@ android {
         applicationId "com.dmsinfosystem"
         minSdkVersion 15
         targetSdkVersion 20
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
     }
 
     buildTypes {
@@ -21,11 +21,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.android.support:support-v4:20.0.+"
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:support-v4:20.0.+'
-    compile 'com.android.support:support-v13:20.0.+'
-
+    //Dependencies for Image Carousel
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.2@aar'
+    //Dependency for Facebook Twitter Page
+    //compile 'it.gcacace.android.socialbuttons:library:1.0.1'
     //compile 'com.google.android.gms:play-services:3.1.36'
-
+    compile 'jexcelapi:jxl:2.6'
 }

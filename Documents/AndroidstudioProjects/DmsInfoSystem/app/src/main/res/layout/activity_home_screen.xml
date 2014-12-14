@@ -19,19 +19,32 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true" /> -->
 
-    <HorizontalScrollView
+   <!-- <HorizontalScrollView
         android:id="@+id/HSVImage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/linearImage"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="0dp"
             android:orientation="horizontal" >
         </LinearLayout>
-    </HorizontalScrollView>
+    </HorizontalScrollView> -->
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        />
+
+    <com.daimajia.slider.library.Indicators.PagerIndicator
+        android:id="@+id/custom_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        />
 
 
     <TextView
@@ -40,6 +53,26 @@
         android:visibility="invisible"
         android:layout_height="wrap_content"
         android:id="@+id/textView" />
+
+
+    <Button
+        android:id="@+id/contactUs"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact Us"
+
+        android:layout_alignParentBottom="true"
+        android:textSize="10pt"/>
+
+    <Button
+        android:id="@+id/shareApp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Share App"
+        android:textSize="10pt"
+        android:layout_above="@+id/contactUs"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
 

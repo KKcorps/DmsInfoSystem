@@ -104,6 +104,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             public void onClick(View view) {
                //Toast.makeText(this, "Buy Button working " + String.valueOf(groupPosition), Toast.LENGTH_SHORT).show();
                 Log.i("Buy","Buy Button working " + String.valueOf(groupPosition));
+
             }
         });
         //buyButton.setId();

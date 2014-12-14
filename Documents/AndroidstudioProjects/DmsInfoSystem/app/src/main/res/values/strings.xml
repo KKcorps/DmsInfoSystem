@@ -9,6 +9,7 @@
     <string name="action_contact">Contact Us</string>
     <string name="drawer_open">Products</string>
     <string name="drawer_close">DMS</string>
+    <string name="searchHint">Product Search</string>
 
     <string-array name="popularProducts">
         <item>Email Hosting</item>
@@ -27,7 +28,7 @@
 
         <string-array name="productHosting">
             <item>Web Hosting</item>
-            <item>E-Seller Hosting</item>
+            <item>Reseller Hosting</item>
             <item>Email Hosting</item>
         </string-array>
 
